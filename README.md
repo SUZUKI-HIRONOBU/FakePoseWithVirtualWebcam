@@ -1,7 +1,9 @@
 # Fake Pose with Virtual Webcam
 
 Auther: Hironobu SUZUKI <suzuki.hironobu@gmail.com>
+
 Date: 2021-10-03
+
 Licence: GPLv3 or later.
 
 ## simple.py
