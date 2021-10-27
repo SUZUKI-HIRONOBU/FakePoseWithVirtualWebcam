@@ -4,6 +4,7 @@
 # Auther: Hironobu SUZUKI <suzuki.hironobu@gmail.com>
 # License: GPL v3 or later
 # Date: 2021-10-03
+# Last: 2021-10-28
 #
 import sys
 import os
@@ -14,7 +15,7 @@ import pyfakewebcam
 vdev='/dev/video0'
 
 args = sys.argv
-if [ args[1] != None ] :
+if  len(args) > 1  :
 	vdev=args[1]
 
 
