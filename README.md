@@ -19,8 +19,8 @@ Fake pose with virtual webcam.
  
  % python3 fakepose.py /dev/video0
  
-Press 'p' pose
-Press 'r' restart
+- Press 'p' pose
+- Press 'r' restart
 
 ## v4l2loopback.sh
 
