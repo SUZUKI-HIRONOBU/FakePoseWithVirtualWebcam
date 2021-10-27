@@ -11,6 +11,12 @@ import cv2
 import math
 import pyfakewebcam
 
+vdev='/dev/video0'
+
+args = sys.argv
+if [ args[1] != None ] :
+	vdev=args[1]
+
 
 v4l2=True
 fakeimg=None
@@ -18,7 +24,7 @@ fakeimg=None
 ### for circle
 cl=[8,16,24,32,40,48,56,64,72,80,88,96,104,112,120,128,136,144,152,160,168,176,184,192,200,208,216,224,232,255]
 
-vdev='/dev/video0'
+
 height, width = 540,960			# This size depends on Fake Webcam
 cam = cv2.VideoCapture(vdev)
 if not cam.isOpened():
@@ -29,7 +35,9 @@ cam.set(cv2.CAP_PROP_FRAME_HEIGHT,height)
 ##cam.set(cv2.CAP_PROP_FPS, 28)
 W = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
 H = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
-print(W,H)
+if int((W/H)*1000) != int((width/height)*1000):
+	print("Camera must support 16:9 aspect ratio:", W,H)
+	sys.exit(1)
 
 ## fake webcam
 if v4l2 :
@@ -69,7 +77,8 @@ while True:
 	###
 	if v4l2 :
 		frame = cv2.cvtColor(fakeimg,cv2.COLOR_BGR2RGB)
-		fake.schedule_frame(frame)
+		resizedFrame = cv2.resize(frame, (width,height))
+		fake.schedule_frame(resizedFrame)
 
 	##
 	k = cv2.waitKey(1)
